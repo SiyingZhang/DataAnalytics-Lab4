@@ -14,27 +14,27 @@ detach(train)
 train$Age<-as.numeric(train$Age)
 
 # Generate ageRank used as the Y-axis variable.
-for(i in 1:length(train$Age)){
-  if(train$Age[i]<5) train$ageRank[i]<-'0-5'
-  else if(train$Age[i]<10) train$ageRank[i]<-'5-10'
-  else if(train$Age[i]<15) train$ageRank[i]<-'10-15'
-  else if(train$Age[i]<20) train$ageRank[i]<-'15-20'
-  else if(train$Age[i]<25) train$ageRank[i]<-'20-25'
-  else if(train$Age[i]<30) train$ageRank[i]<-'25-30'
-  else if(train$Age[i]<35) train$ageRank[i]<-'30-35'
-  else if(train$Age[i]<40) train$ageRank[i]<-'35-40'
-  else if(train$Age[i]<45) train$ageRank[i]<-'40-45'
-  else if(train$Age[i]<50) train$ageRank[i]<-'45-50'
-  else if(train$Age[i]<55) train$ageRank[i]<-'50-55'
-  else if(train$Age[i]<60) train$ageRank[i]<-'55-60'
-  else if(train$Age[i]<65) train$ageRank[i]<-'60-65'
-  else if(train$Age[i]<70) train$ageRank[i]<-'65-70'
-  else if(train$Age[i]<75) train$ageRank[i]<-'70-75'
-  else if(train$Age[i]<80) train$ageRank[i]<-'75-80'
-  else if(train$Age[i]<85) train$ageRank[i]<-'80-85'
-  else if(train$Age[i]<90) train$ageRank[i]<-'85-90'
-  else train$ageRank[i]<-'>=90'
-}
+# Make it like R code.
+train$ageRank[train$Age<=5]<-'0-5'
+train$ageRank[train$Age>5]<-'5-10'
+train$ageRank[train$Age>10]<-'10-15'
+train$ageRank[train$Age>15]<-'15-20'
+train$ageRank[train$Age>20]<-'20-25'
+train$ageRank[train$Age>25]<-'25-30'
+train$ageRank[train$Age>30]<-'30-35'
+train$ageRank[train$Age>35]<-'35-40'
+train$ageRank[train$Age>40]<-'40-45'
+train$ageRank[train$Age>45]<-'45-50'
+train$ageRank[train$Age>50]<-'50-55'
+train$ageRank[train$Age>55]<-'55-60'
+train$ageRank[train$Age>60]<-'60-65'
+train$ageRank[train$Age>65]<-'65-70'
+train$ageRank[train$Age>70]<-'70-75'
+train$ageRank[train$Age>75]<-'75-80'
+train$ageRank[train$Age>80]<-'80-85'
+train$ageRank[train$Age>85]<-'85-90'
+train$ageRank[train$Age>90]<-'>90'
+
 
 # Rearrange the dataframe by Age
 # with http://www.statmethods.net/stats/withby.html 
@@ -42,7 +42,7 @@ for(i in 1:length(train$Age)){
 train$ageRank <- with(train, reorder(ageRank,Age))
 
 # Generate new dataframe using columns selected.
-myvars <- names(train) %in% c("Age","ageRank","Survived","Pclass","SibSp","Parch","Fare") 
+myvars <- names(train) %in% c("ageRank","Survived","Pclass","SibSp","Parch","Fare") 
 train.new <- train[myvars]
 
 # Generate scale needed in heatmap
